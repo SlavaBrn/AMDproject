@@ -19,16 +19,28 @@ public class FewPromPage extends BasePage {
     public final String EXPIRATION = "//span[text() = 'Expiration']";
     public final String STATUS = "//span[text() = 'Status']";
     public final String LOGOUT_LINK = "//span[text() = 'Logout']";
-    public final String PROMOTION_COLUMN_RU = "//span[text() = 'Promotion']";
-    public final String EXPIRATION_RU = "//span[text() = 'Expiration']";
-    public final String STATUS_RU = "//span[text() = 'Status']";
+    public final String PROMOTION_COLUMN_RU = "//span[text() = 'Название акции']";
+    public final String EXPIRATION_RU = "//span[text() = 'Дата окончания']";
+    public final String STATUS_RU = "//span[text() = 'Статус']";
+    public final String LOGOUT_LINK_RU = "//button[text() = 'Выйти']";
 
 
-    private final String ACTIVE = "//span[text() = 'Active']";
+
     private final String LOCK = "//*[@xmlns = 'http://www.w3.org/2000/svg']";
     private final String UNLOCK_REQUEST_HEADER = "//*[text() = 'Unlock Code Request']";
     private final String PROMOTION_ICON = "//span[text() = 'Promotion %d']";
     private final String LOGOUT_BUTTON = "//button[@id = 'logout-button']";
+    private final String ACTIVE = "//span[text() = 'Active']";
+    private final String DOWNLOADED = "//span[text() = 'Downloaded']";
+    private final String Expired = "//span[text() = 'Expired']";
+    private final String Deactivated = "//span[text() = 'Deactivated']";
+    private final String ACTIVE_RU = "//span[text() = 'Активная']";
+    private final String DOWNLOADED_RU = "//span[text() = 'Скачанная']";
+    private final String Expired_RU = "//span[text() = 'Закончившаяся']";
+    private final String Deactivated_RU = "//span[text() = 'Деактивированная']";
+
+
+    private final String UNLOCK_REQUEST_HEADER_RU = "//*[text() = 'Запрос кода разблокировки']";
 
 
     public String isPromotion0Visible() {
@@ -50,6 +62,13 @@ public class FewPromPage extends BasePage {
         clickIt.click();
         return new CodeRequestPopup();
     }
+    public CodeRequestPopup openCodeRequestPageForRussian() {
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_REQUEST_HEADER_RU)));
+        WebElement nameText = webDriver.findElement(By.xpath(ACTIVE_RU));
+        WebElement clickIt = webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText));
+        clickIt.click();
+        return new CodeRequestPopup();
+    }
 
     public void promotionLock(int num) {
         String path = String.format(PROMOTION_ICON, num);
@@ -57,13 +76,14 @@ public class FewPromPage extends BasePage {
         WebElement nameText = webDriver.findElement(By.xpath(path));
         webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText)).click();
 
+        //English language promotion headers
     }
     public String promotionHeaderCheck(){
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
         return findElementByXpath(PROMOTION_COLUMN).getText();
     }
-    public String ExpirationHeaderCheck(){
+    public String expirationHeaderCheck(){
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
         return findElementByXpath(EXPIRATION).getText();
@@ -71,8 +91,88 @@ public class FewPromPage extends BasePage {
     public String statusHeaderCheck(){
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
-        return findElementByXpath(PROMOTION_COLUMN).getText();
+        return findElementByXpath(STATUS).getText();
     }
+
+    //    Russian Language promotion headers
+    public void russianSelectorOption() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+    }
+
+    public String promotionHeaderCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(PROMOTION_COLUMN_RU).getText();
+    }
+
+    public String expirationHeaderCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(EXPIRATION_RU).getText();
+    }
+
+    public String statusHeaderCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(STATUS_RU).getText();
+    }
+    public String logoutButtonLanguageCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(LOGOUT_LINK_RU).getText();
+    }
+//English statuses language check
+
+    public String activeLanguageCheck() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_EN);
+        return findElementByXpath(ACTIVE).getText();
+    }
+
+    public String downloadedLanguageCheck() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_EN);
+        return findElementByXpath(DOWNLOADED).getText();
+    }
+
+    public String expiredLanguageCheck() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_EN);
+        return findElementByXpath(Expired).getText();
+    }
+
+    public String deactivatedLanguageCheck() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_EN);
+        return findElementByXpath(Deactivated).getText();
+    }
+
+//    Russian statuses Language check
+public String activeLanguageCheckRu() {
+    clickElementByXpath(LANGUAGE_SELECTOR);
+    clickElementByXpath(LANGUAGE_SELECTOR_RU);
+    return findElementByXpath(ACTIVE_RU).getText();
+}
+
+    public String downloadedLanguageCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(DOWNLOADED_RU).getText();
+    }
+
+    public String expiredLanguageCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(Expired_RU).getText();
+    }
+
+    public String deactivatedLanguageCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(Deactivated_RU).getText();
+    }
+
 
 
 

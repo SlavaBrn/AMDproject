@@ -50,7 +50,7 @@ public class LoginTestPage extends UseCaseBase {
     public void fewPromPageTest() {
         FewPromPage fewPromPage = loginPage.openFewPromPage();
         String isPage = fewPromPage.isPromotion0Visible();
-        assertEquals("Promotion 0", isPage);
+        assertEquals("Promotion", isPage);
     }
 
 

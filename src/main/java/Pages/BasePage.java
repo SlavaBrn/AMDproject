@@ -16,6 +16,7 @@ public class BasePage {
     protected static WebDriverWait wait;
     protected static WebDriverWait short_wait;
     protected static WebDriverWait long_wait;
+    protected static WebDriverWait eightSec_wait;
     protected static final Logger logger = LogManager.getLogger(BasePage.class);
 
     public void setDriver(WebDriver webDriver) {
@@ -23,6 +24,8 @@ public class BasePage {
         wait = new WebDriverWait(webDriver, 5);
         short_wait = new WebDriverWait(webDriver, 3);
         long_wait = new WebDriverWait(webDriver, 10);
+        eightSec_wait = new WebDriverWait(webDriver,8);
+
     }
 
     public void clickElementByXpath(String xpath) {
