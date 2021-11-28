@@ -14,7 +14,6 @@ public class FewPromPage extends BasePage {
     private final String LANGUAGE_SELECTOR_EN = "//option[@value = 'EN']";
     private final String LANGUAGE_SELECTOR_RU = "//option[@value = 'RU']";
     private final String LANGUAGE_SELECTOR = "//*[@class = 'lang-selector']";
-    public final String PROMOTION0 = "//span[text() = 'Promotion 0']";
     public final String PROMOTION_COLUMN = "//span[text() = 'Promotion']";
     public final String EXPIRATION = "//span[text() = 'Expiration']";
     public final String STATUS = "//span[text() = 'Status']";
@@ -25,9 +24,13 @@ public class FewPromPage extends BasePage {
     public final String LOGOUT_LINK_RU = "//button[text() = 'Выйти']";
 
 
-
     private final String LOCK = "//*[@xmlns = 'http://www.w3.org/2000/svg']";
+    private final String OPENED_LOCK = "//*[@xmlns = 'http://www.w3.org/2000/svg']";
+    private final String OPENED_LOCK1 = "//svg[@fill = '#007C97']";
     private final String UNLOCK_REQUEST_HEADER = "//*[text() = 'Unlock Code Request']";
+    private final String START_DOWNLOAD_BUTTON = "//*[text() = 'Start Download']";
+    private final String DOWNLOAD_FILE_HEADER  = "//span[@id = 'overlay-window-header-caption']";
+
     private final String PROMOTION_ICON = "//span[text() = 'Promotion %d']";
     private final String LOGOUT_BUTTON = "//button[@id = 'logout-button']";
     private final String ACTIVE = "//span[text() = 'Active']";
@@ -38,8 +41,6 @@ public class FewPromPage extends BasePage {
     private final String DOWNLOADED_RU = "//span[text() = 'Скачанная']";
     private final String Expired_RU = "//span[text() = 'Закончившаяся']";
     private final String Deactivated_RU = "//span[text() = 'Деактивированная']";
-
-
     private final String UNLOCK_REQUEST_HEADER_RU = "//*[text() = 'Запрос кода разблокировки']";
 
 
@@ -54,7 +55,6 @@ public class FewPromPage extends BasePage {
     }
 
 
-
     public CodeRequestPopup openCodeRequestPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_REQUEST_HEADER)));
         WebElement nameText = webDriver.findElement(By.xpath(ACTIVE));
@@ -62,6 +62,7 @@ public class FewPromPage extends BasePage {
         clickIt.click();
         return new CodeRequestPopup();
     }
+
     public CodeRequestPopup openCodeRequestPageForRussian() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_REQUEST_HEADER_RU)));
         WebElement nameText = webDriver.findElement(By.xpath(ACTIVE_RU));
@@ -70,27 +71,43 @@ public class FewPromPage extends BasePage {
         return new CodeRequestPopup();
     }
 
+
     public void promotionLock(int num) {
         String path = String.format(PROMOTION_ICON, num);
         short_wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
         WebElement nameText = webDriver.findElement(By.xpath(path));
         webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText)).click();
-
-        //English language promotion headers
     }
-    public String promotionHeaderCheck(){
+
+//    Open DownloadFilePopup
+
+        public DownloadFilePopup openDownloadFilePopup() {
+//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(START_DOWNLOAD_BUTTON)));
+        WebElement nameText = webDriver.findElement(By.xpath(LOCK));
+        WebElement clickIt = webDriver.findElement(with(By.xpath(OPENED_LOCK)).toRightOf(nameText));
+        clickIt.click();
+        return new DownloadFilePopup();
+    }
+
+
+    //English language promotion headers
+
+    public String promotionHeaderCheck() {
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
         return findElementByXpath(PROMOTION_COLUMN).getText();
     }
-    public String expirationHeaderCheck(){
+
+    public String expirationHeaderCheck() {
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
         return findElementByXpath(EXPIRATION).getText();
     }
-    public String statusHeaderCheck(){
+
+    public String statusHeaderCheck() {
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_EN);
+
         return findElementByXpath(STATUS).getText();
     }
 
@@ -117,6 +134,7 @@ public class FewPromPage extends BasePage {
         clickElementByXpath(LANGUAGE_SELECTOR_RU);
         return findElementByXpath(STATUS_RU).getText();
     }
+
     public String logoutButtonLanguageCheckRu() {
         clickElementByXpath(LANGUAGE_SELECTOR);
         clickElementByXpath(LANGUAGE_SELECTOR_RU);
@@ -148,12 +166,12 @@ public class FewPromPage extends BasePage {
         return findElementByXpath(Deactivated).getText();
     }
 
-//    Russian statuses Language check
-public String activeLanguageCheckRu() {
-    clickElementByXpath(LANGUAGE_SELECTOR);
-    clickElementByXpath(LANGUAGE_SELECTOR_RU);
-    return findElementByXpath(ACTIVE_RU).getText();
-}
+    //    Russian statuses Language check
+    public String activeLanguageCheckRu() {
+        clickElementByXpath(LANGUAGE_SELECTOR);
+        clickElementByXpath(LANGUAGE_SELECTOR_RU);
+        return findElementByXpath(ACTIVE_RU).getText();
+    }
 
     public String downloadedLanguageCheckRu() {
         clickElementByXpath(LANGUAGE_SELECTOR);
@@ -172,8 +190,6 @@ public String activeLanguageCheckRu() {
         clickElementByXpath(LANGUAGE_SELECTOR_RU);
         return findElementByXpath(Deactivated_RU).getText();
     }
-
-
 
 
 }

@@ -7,7 +7,7 @@ public class CodeRequestPopup extends BasePage {
     private final String unlock = "//*[text() = 'Unlock Code Request']";
 
     private final String GREETING_TEXT = "//*[text() = 'In order to download this file you need to unlock it first.']";
-    private final String UNLOCK_FIELD = "//*[@class = 'popup-window-input-field']";
+    public static String UNLOCK_FIELD = "//*[@class = 'popup-window-input-field']";
     private final String UNLOCK_PLACEHOLDER = "//*[@placeholder = 'Enter Unlock Code']";
     private final String UNLOCK_REQUEST = "//*[text() = 'Request Unlock Code']";
     private final String SUBMIT_CODE_BUTTON = "//input[@type = 'submit']";
@@ -23,8 +23,11 @@ public class CodeRequestPopup extends BasePage {
 
     //    For Buttons actions
     private final String UNLOCK_SENT_MESSAGE = "//*[text() = 'Unlock code was sent to your email.']";
-    private final String RESEND_UNLOCK_BUTTON    = "//*[text() = 'Resend Unlock Code']";
+    private final String RESEND_UNLOCK_BUTTON = "//*[text() = 'Resend Unlock Code']";
 
+//    Success
+
+    private final String SUCCESS_CODE_INPUT = "200000";
 
 
     //     Unlock Code Request popup elements language check
@@ -80,27 +83,34 @@ public class CodeRequestPopup extends BasePage {
 
 
     //Actions with buttons
-    public void sendproba(){
-        clickElementByXpath(UNLOCK_REQUEST);
-    }
+
 
     public boolean requestUnlockButtonPressMessage() {
         clickElementByXpath(UNLOCK_REQUEST);
         return elementExists(UNLOCK_SENT_MESSAGE);
     }
+
     public boolean resendUnlockButtonPressMessage() {
         clickElementByXpath(UNLOCK_REQUEST);
-       long_wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        long_wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
         clickElementByXpath(RESEND_UNLOCK_BUTTON);
         return elementExists(UNLOCK_SENT_MESSAGE);
     }
-    public FewPromPage pressCancelButton(){
-       clickElementByXpath(CANCEL_BUTTON);
-       return new FewPromPage();
+
+    public FewPromPage pressCancelButton() {
+        clickElementByXpath(CANCEL_BUTTON);
+        return new FewPromPage();
 
     }
-//    Unlock Popup (code submit)
 
+    //    Unlock Popup (code submit)
+    public SuccessPopup openSuccessPopup() {
+        clickElementByXpath(UNLOCK_REQUEST);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        sendKeysByXpath(UNLOCK_FIELD, SUCCESS_CODE_INPUT);
+        clickElementByXpath(SUBMIT_CODE_BUTTON);
+        return new SuccessPopup();
+    }
 
 
 }

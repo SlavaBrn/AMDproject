@@ -1,13 +1,14 @@
 import Pages.CodeRequestPopup;
 import Pages.FewPromPage;
 import Pages.LoginPage;
+import Pages.SuccessPopup;
 import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+
 
 public class CodeRequestPopupTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
@@ -23,7 +24,7 @@ public class CodeRequestPopupTest extends UseCaseBase {
 
     @BeforeEach
     public void Each() {
-        loginPage.navigateLoginPage();
+        LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
 
 
@@ -118,13 +119,7 @@ public class CodeRequestPopupTest extends UseCaseBase {
         assertTrue(is);
     }
 
-//    @Test
-//    public void popupPageLanguageCheck6Ru() {
-//        fewPromPage.russianSelectorOption();
-//        fewPromPage.openCodeRequestPageForRussian();
-//        boolean is = codeRequestPopup.isC();
-//        assertTrue(is);
-//    }
+
 
 //    Buttons Actions
 
@@ -146,6 +141,14 @@ public class CodeRequestPopupTest extends UseCaseBase {
         FewPromPage fewPromPage = codeRequestPopup.pressCancelButton();
         boolean is = fewPromPage.isLogOutButtonVisible();
         assertTrue(is);
+    }
+    @Test
+    public void newSuccessPopupTest(){
+        fewPromPage.openCodeRequestPage();
+        SuccessPopup successPopup = codeRequestPopup.openSuccessPopup();
+        boolean is = successPopup.isSuccessMessageVisible();
+        assertTrue(is);
+
     }
 
 }

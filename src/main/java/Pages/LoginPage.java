@@ -208,16 +208,7 @@ public class LoginPage extends BasePage {
     public String passwordOverText(){
         return findElementByXpath(PASSWORD_VISIBLE).getAttribute("type");
     }
-//    public String emailFieldEmpty(){
-////        sendKeysByXpath(EMAIL_FIELD,"");
-//        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(ERROR_INVISIBLE_EN)));
-////        clickElementByXpath(PASSWORD_FIELD);
-//        WebElement element = findElementByXpath(PASSWORD_FIELD);
-//        Actions actions = new Actions(webDriver);
-//        actions.doubleClick(element).build().perform();
-//        return findElementByXpath(ERROR_INVISIBLE_EN).getText();
-//
-//    }
+
 
 
 }

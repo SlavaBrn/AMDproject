@@ -1,4 +1,4 @@
-import Pages.BasePage;
+
 import Pages.FewPromPage;
 import Pages.ForgotPassword;
 import Pages.LoginPage;
@@ -6,23 +6,18 @@ import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
-import javax.xml.xpath.XPath;
+
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTestPage extends UseCaseBase {
 
 
-//    proba?
 
-    private static final String active = "//*[text() ='Active']";
-    private static final String text = "//*[contains(text(), 'Active')]";
-    private static final String lock = "//*[@xmlns = 'http://www.w3.org/2000/svg']";
+
 
     public static LoginPage loginPage;
     public static ForgotPassword forgotPassword;
@@ -37,7 +32,7 @@ public class LoginTestPage extends UseCaseBase {
 
     @BeforeEach
     public void beforeEachTest() {
-        loginPage.navigateLoginPage();
+        LoginPage.navigateLoginPage();
     }
 
     @Test
@@ -103,11 +98,6 @@ public class LoginTestPage extends UseCaseBase {
      assertEquals("password",isPassword);
 
     }
-//    @Test
-//    public void emptyEmailFieldError(){
-//        String isError = loginPage.emailFieldEmpty();
-//        assertEquals("Please fill all the fields.",isError);
-//    }
 
 }
 

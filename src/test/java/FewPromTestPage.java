@@ -1,13 +1,11 @@
-import Pages.CodeRequestPopup;
-import Pages.FewPromPage;
-import Pages.LoginPage;
+import Pages.*;
 import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.WebElement;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,16 +13,22 @@ public class FewPromTestPage extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
     public static CodeRequestPopup codeRequestPopup;
+    public static SuccessPopup successPopup;
+
 
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
         codeRequestPopup = new CodeRequestPopup();
+        successPopup = new SuccessPopup();
+
+
+
     }
 
     @BeforeEach
     public void beforeEach() {
-        loginPage.navigateLoginPage();
+        LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
     }
 
@@ -95,4 +99,16 @@ public class FewPromTestPage extends UseCaseBase {
         assertEquals("Деактивированная", is3);
 
     }
+
+
+    @Test
+    public void downloadFilePopupCheck() {
+        fewPromPage.openCodeRequestPage();
+        codeRequestPopup.openSuccessPopup();
+        fewPromPage = successPopup.returnToFewPromPage();
+        DownloadFilePopup downloadFilePopup = fewPromPage.openDownloadFilePopup();
+        String is = downloadFilePopup.isDownloadHeaderVisible();
+        assertEquals("Download File", is);
+    }
+
 }
