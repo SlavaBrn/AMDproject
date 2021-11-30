@@ -1,38 +1,61 @@
 
-import Pages.FewPromPage;
-import Pages.ForgotPassword;
-import Pages.LoginPage;
+import Pages.*;
 import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginTestPage extends UseCaseBase {
-
-
-
+    private static final String INCOMPLETE_EMAIL1 = "ddeuud@";
+    private static final String INCOMPLETE_MAIL2 = "@a.com";
+    private static final String INCOMPLETE_MAIL3 = "@";
+    private static final String EMAIL_EMPTY = "            ";
+    private static final String MAIL_ONLY_LETTERS = "jdejndejd";
 
 
     public static LoginPage loginPage;
-    public static ForgotPassword forgotPassword;
+    public static PasswordReset forgotPassword;
 
 
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
-        forgotPassword = new ForgotPassword();
+        forgotPassword = new PasswordReset();
 
     }
 
     @BeforeEach
     public void beforeEachTest() {
         LoginPage.navigateLoginPage();
+    }
+
+//    Negative test: incomplete chars in E-mail field with the correct password
+
+    @ParameterizedTest
+    @ValueSource(strings = {INCOMPLETE_EMAIL1, INCOMPLETE_MAIL2, INCOMPLETE_MAIL3, EMAIL_EMPTY, MAIL_ONLY_LETTERS})
+    public void emailFieldNegative(String input) {
+        loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD, "testpass");
+        loginPage.sendKeysByXpath(loginPage.EMAIL_FIELD, input);
+        loginPage.clickElementByXpath(loginPage.SUBMIT_BUTTON);
+        boolean is = loginPage.IsLForgotPasswordLink();
+        assertTrue(is);
+    }
+
+    //    Incorrect Credentials message "The email and password you entered do not match our records"
+    @Test
+    public void incorrectCredentials() {
+        loginPage.sendKeysByXpath(loginPage.EMAIL_FIELD, "hgdeyd@a");
+        loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD, "bsuxusxunxsnu");
+        loginPage.clickElementByXpath(loginPage.SUBMIT_BUTTON);
+        boolean is = loginPage.IsLPasswordOrLoginIncorrect();
+        assertTrue(is);
+
+
     }
 
     @Test
@@ -49,7 +72,6 @@ public class LoginTestPage extends UseCaseBase {
     }
 
 
-
     @Test
     public void englishLoginCaptionCheck() {
         loginPage.loginHeaderCheck();
@@ -57,47 +79,67 @@ public class LoginTestPage extends UseCaseBase {
         assertEquals("English", is0);
         String is = loginPage.loginHeaderCheck();
         assertEquals("Log in to your account", is);
-        String is1 =loginPage.loginFieldPlaceholderCheck();
-        assertEquals("Enter your e-mail",is1);
+        String is1 = loginPage.loginFieldPlaceholderCheck();
+        assertEquals("Enter your e-mail", is1);
         String is2 = loginPage.passwordHeaderCheck();
-        assertEquals("Password",is2);
-        String is3 =loginPage.loginPassFieldPlaceholderCheck();
-        assertEquals("Enter your password",is3);
+        assertEquals("Password", is2);
+        String is3 = loginPage.loginPassFieldPlaceholderCheck();
+        assertEquals("Enter your password", is3);
         String is4 = loginPage.forgotPasswordLinkCheck();
-        assertEquals("Forgot password?",is4);
+        assertEquals("Forgot password?", is4);
         String is5 = loginPage.loginNowButtonCheck();
-        assertEquals("Login now",is5);
+        assertEquals("Login now", is5);
 
     }
+
     @Test
-    public void russianLoginCaptionCheck(){
+    public void russianLoginCaptionCheck() {
         String is0 = loginPage.languageSelectorHeaderCheckRu();
         assertEquals("Русский", is0);
         loginPage.loginHeaderCheck();
         String is = loginPage.loginHeaderCheckRu();
         assertEquals("Вход в аккаунт", is);
-        String is1 =loginPage.loginFieldPlaceholderCheckRu();
-        assertEquals("Введите ваш e-mail",is1);
+        String is1 = loginPage.loginFieldPlaceholderCheckRu();
+        assertEquals("Введите ваш e-mail", is1);
         String is2 = loginPage.passwordHeaderCheckRu();
-        assertEquals("Пароль",is2);
-        String is3 =loginPage.loginPassFieldPlaceholderCheckRu();
-        assertEquals("Введите ваш пароль",is3);
+        assertEquals("Пароль", is2);
+        String is3 = loginPage.loginPassFieldPlaceholderCheckRu();
+        assertEquals("Введите ваш пароль", is3);
         String is4 = loginPage.forgotPasswordLinkCheckRu();
-        assertEquals("Забыли пароль?",is4);
+        assertEquals("Забыли пароль?", is4);
         String is5 = loginPage.loginNowButtonCheckRu();
-        assertEquals("Войти",is5);
+        assertEquals("Войти", is5);
     }
+
     @Test
-    public void passwordOrTextHiding(){
-     loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD,"testpass");
-     loginPage.clickElementByXpath(loginPage.TEXT_PASSWORD_ICON);
-     String isText = loginPage.textOverPassword();
-     assertEquals("text",isText);
-     loginPage.clickElementByXpath(loginPage.TEXT_PASSWORD_ICON);
-     String isPassword = loginPage.passwordOverText();
-     assertEquals("password",isPassword);
+    public void passwordOrTextHiding() {
+        loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD, "testpass");
+        loginPage.clickElementByXpath(loginPage.TEXT_PASSWORD_ICON);
+        String isText = loginPage.textOverPassword();
+        assertEquals("text", isText);
+        loginPage.clickElementByXpath(loginPage.TEXT_PASSWORD_ICON);
+        String isPassword = loginPage.passwordOverText();
+        assertEquals("password", isPassword);
 
     }
+
+    //    Admin Section
+//    Opening new page success
+    @Test
+    public void openRegisterNewUserPage() {
+        RegisterNewUserPage registerNewUserPage = loginPage.openRegisterNewUserPage();
+        String is = registerNewUserPage.isNewUserHeaderVisible();
+        assertEquals("Register a new user", is);
+    }
+
+    //    Success (need to change password)
+    @Test
+    public void openNewPasswordPage() {
+        SetUpNewPasswordPage setUpNewPasswordPage = loginPage.openSutUpNewPasswordPage();
+        String is = setUpNewPasswordPage.isNewPasswordHeaderVisible();
+        assertEquals("Set up new password", is);
+
+    }
+//    Success (need to change password and the change will fail)
 
 }
-

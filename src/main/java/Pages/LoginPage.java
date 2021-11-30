@@ -1,18 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import java.net.PortUnreachableException;
-import java.time.Duration;
-
-import static org.openqa.selenium.support.locators.RelativeLocator.with;
 
 
 public class LoginPage extends BasePage {
@@ -74,6 +62,10 @@ public class LoginPage extends BasePage {
     private final String ENTER_PASSWORD_PLACEHOLDER = "//*[@placeholder = 'Enter your password']";
     public final String SUBMIT_BUTTON_HEADER = "//input[@value = 'Login now']";
 
+//    private final String RECORDS_ERROR = "//*[(text() = 'The email and password you entered do not match our records')]";
+    private final String RECORDS_ERROR = "//span[@class =  'error-text error-show']";
+
+
 
     public final String ACCOUNT_GREETING_russian = "//span[text() = 'Вход в аккаунт']";
     public final String ENTER_EMAIL_PLACEHOLDER_RU = "//input[@placeholder = 'Введите ваш e-mail']";
@@ -85,10 +77,7 @@ public class LoginPage extends BasePage {
     public final String TEXT_VISIBLE = "//input[@type = 'text']";
     public final String PASSWORD_VISIBLE = "//input[@type = 'password']";
 
-    private static final String INCOMPLETE_EMAIL_FIELD_INPUT1 = "@a.com";
-    private static final String INCOMPLETE_EMAIL_FIELD_INPUT2 = "fef1@";
-    private static final String INCOMPLETE_EMAIL_FIELD_INPUT3 = "abcDEF45%^&*$";
-    public final String ERROR_INVISIBLE_EN = "//span[contains (text() , 'Use passwords')]";
+
 
 
 
@@ -98,6 +87,14 @@ public class LoginPage extends BasePage {
         return elementExists(AUTH_FRAME);
 
     }
+    public boolean IsLForgotPasswordLink() {
+        return elementExists(FORGOT_PASS_LINK);
+
+    }
+    public boolean IsLPasswordOrLoginIncorrect() {
+        return elementExists(RECORDS_ERROR);
+    }
+
 
     public static void navigateLoginPage() {
         webDriver.get(Const.LOGIN_URL);
@@ -207,6 +204,34 @@ public class LoginPage extends BasePage {
     }
     public String passwordOverText(){
         return findElementByXpath(PASSWORD_VISIBLE).getAttribute("type");
+    }
+
+//   Open Password Reset Page
+    public PasswordReset openPasswordResetPage(){
+        clickElementByXpath(FORGOT_PASS_LINK);
+        return new PasswordReset();
+    }
+
+    public RegisterNewUserPage openRegisterNewUserPage(){
+        sendKeysByXpath(EMAIL_FIELD,"admin@a.com");
+        sendKeysByXpath(PASSWORD_FIELD,"testpass");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return new RegisterNewUserPage();
+
+    }
+    public SetUpNewPasswordPage openSutUpNewPasswordPage(){
+        sendKeysByXpath(EMAIL_FIELD,"change@a.com");
+        sendKeysByXpath(PASSWORD_FIELD,"testpass");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return new SetUpNewPasswordPage();
+
+    }
+    public SetUpNewPasswordFailPage openSutUpNewPasswordWithFailPage(){
+        sendKeysByXpath(EMAIL_FIELD,"changefail@a.com");
+        sendKeysByXpath(PASSWORD_FIELD,"testpass");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return new SetUpNewPasswordFailPage();
+
     }
 
 

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class CodeRequestPopupTest extends UseCaseBase {
@@ -26,8 +26,6 @@ public class CodeRequestPopupTest extends UseCaseBase {
     public void Each() {
         LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
-
-
     }
     //    Unlock Code Request popup elements language check
 
@@ -142,13 +140,24 @@ public class CodeRequestPopupTest extends UseCaseBase {
         boolean is = fewPromPage.isLogOutButtonVisible();
         assertTrue(is);
     }
+
+    //    ---------------- Code Submitting for Unlock Request Popup------------------------
+//    Success
     @Test
     public void newSuccessPopupTest(){
         fewPromPage.openCodeRequestPage();
         SuccessPopup successPopup = codeRequestPopup.openSuccessPopup();
         boolean is = successPopup.isSuccessMessageVisible();
         assertTrue(is);
-
     }
+//    Code Fail
+    @Test
+    public void noValidMessage(){
+        fewPromPage.openCodeRequestPage();
+        codeRequestPopup.codeFail();
+        boolean is = codeRequestPopup.isFailMessage();
+        assertTrue(is);
+    }
+
 
 }

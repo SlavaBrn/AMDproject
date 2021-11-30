@@ -25,9 +25,16 @@ public class CodeRequestPopup extends BasePage {
     private final String UNLOCK_SENT_MESSAGE = "//*[text() = 'Unlock code was sent to your email.']";
     private final String RESEND_UNLOCK_BUTTON = "//*[text() = 'Resend Unlock Code']";
 
-//    Success
-
+    //    Codes
     private final String SUCCESS_CODE_INPUT = "200000";
+    private final String FAIL_CODE_INPUT = "23456778";
+    private final String FAIL_SERVER_INPUT = "500000";
+    private final String UNKNOWN_ERROR_INPUT = "400000 ";
+    private final String LIMITER_ERROR_INPUT = "429000 ";
+    private final String NOT_VALID_MESSAGE = "//div[text() = 'Please, enter a valid 6-digit code']";
+    private final String SERVER_FAILED_MESSAGE = "//div[text() = 'Request ID: req500']";
+    private final String UNKNOWN_ERROR_MESSAGE = "//div[text() = 'Request ID: req400']";
+    private final String LIMITER_ERROR_MESSAGE = "//div[text() = 'Too many attempts.']";
 
 
     //     Unlock Code Request popup elements language check
@@ -103,6 +110,9 @@ public class CodeRequestPopup extends BasePage {
 
     }
 
+//    ---------------- Unlock Popup (Code Submit)------------------------
+
+
     //    Unlock Popup (code submit)
     public SuccessPopup openSuccessPopup() {
         clickElementByXpath(UNLOCK_REQUEST);
@@ -110,6 +120,49 @@ public class CodeRequestPopup extends BasePage {
         sendKeysByXpath(UNLOCK_FIELD, SUCCESS_CODE_INPUT);
         clickElementByXpath(SUBMIT_CODE_BUTTON);
         return new SuccessPopup();
+    }
+
+    public void codeFail() {
+        clickElementByXpath(UNLOCK_REQUEST);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        sendKeysByXpath(UNLOCK_FIELD, FAIL_CODE_INPUT);
+        clickElementByXpath(SUBMIT_CODE_BUTTON);
+    }
+
+    public boolean isFailMessage() {
+        return elementExists(NOT_VALID_MESSAGE);
+
+    }
+
+    public void serverFail() {
+        clickElementByXpath(UNLOCK_REQUEST);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        sendKeysByXpath(UNLOCK_FIELD, FAIL_SERVER_INPUT);
+        clickElementByXpath(SUBMIT_CODE_BUTTON);
+    }
+
+    public boolean isServerFailMessage() {
+        return elementExists(SERVER_FAILED_MESSAGE);
+    }
+
+    public void unknownError() {
+        clickElementByXpath(UNLOCK_REQUEST);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        sendKeysByXpath(UNLOCK_FIELD, UNKNOWN_ERROR_INPUT);
+        clickElementByXpath(SUBMIT_CODE_BUTTON);
+    }
+
+    public boolean isUnknownErrorMessage() {
+        return elementExists(UNKNOWN_ERROR_MESSAGE);
+    }
+    public void limiterError() {
+        clickElementByXpath(UNLOCK_REQUEST);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        sendKeysByXpath(UNLOCK_FIELD, LIMITER_ERROR_INPUT);
+        clickElementByXpath(SUBMIT_CODE_BUTTON);
+    }
+    public boolean isLimiterErrorMessage() {
+        return elementExists(LIMITER_ERROR_MESSAGE);
     }
 
 
