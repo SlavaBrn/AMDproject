@@ -1,7 +1,4 @@
-import Pages.CodeRequestPopup;
-import Pages.FewPromPage;
-import Pages.PasswordReset;
-import Pages.LoginPage;
+import Pages.*;
 import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +11,7 @@ public class ErrorsClass extends UseCaseBase {
     public static LoginPage loginPage;
     public static CodeRequestPopup codeRequestPopup;
     public static PasswordReset passwordReset;
+    public static PasswordResetCodePage passwordResetCodePage;
 
     @BeforeAll
     public static void pageSetup() {
@@ -21,11 +19,13 @@ public class ErrorsClass extends UseCaseBase {
         codeRequestPopup = new CodeRequestPopup();
         loginPage = new LoginPage();
         passwordReset = new PasswordReset();
+        passwordResetCodePage = new PasswordResetCodePage();
     }
 
     @BeforeEach
     public void Each() {
         loginPage.navigateLoginPage();
+
 //        fewPromPage = loginPage.openFewPromPage();
     }
 
@@ -38,12 +38,22 @@ public class ErrorsClass extends UseCaseBase {
         boolean is = passwordReset.isManyAttemptsMessageVisible();
         assertTrue(is);
     }
+//Code Submit Password Reset Page
+//    Code Fail
+
+    @Test
+    public void codeFail() {
+        loginPage.openPasswordResetPage();
+        passwordReset.successOpenCodePasswordResetPage();
+        boolean is = passwordResetCodePage.codeFail();
+        assertTrue(is);
+    }
 
     //    Unlock Popup
     //    Code Fail
     @Test
     public void noValidMessage() {
-        fewPromPage = loginPage.openFewPromPage();
+        loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.codeFail();
         boolean is = codeRequestPopup.isFailMessage();
@@ -53,7 +63,7 @@ public class ErrorsClass extends UseCaseBase {
     //    Limiter Error
     @Test
     public void unknownError() {
-        fewPromPage = loginPage.openFewPromPage();
+        loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.limiterError();
         boolean is = codeRequestPopup.isLimiterErrorMessage();

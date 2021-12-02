@@ -83,6 +83,8 @@ public class LoginPage extends BasePage {
 
 
 
+
+
     public boolean IsLoginPageVisible() {
         return elementExists(AUTH_FRAME);
 
@@ -206,11 +208,13 @@ public class LoginPage extends BasePage {
         return findElementByXpath(PASSWORD_VISIBLE).getAttribute("type");
     }
 
-//   Open Password Reset Page
+//   Open Password Reset Page (by clicking on forgot password link)
     public PasswordReset openPasswordResetPage(){
         clickElementByXpath(FORGOT_PASS_LINK);
         return new PasswordReset();
     }
+
+
 
     public RegisterNewUserPage openRegisterNewUserPage(){
         sendKeysByXpath(EMAIL_FIELD,"admin@a.com");

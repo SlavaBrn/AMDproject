@@ -70,6 +70,14 @@ public class LoginTestPage extends UseCaseBase {
         String isPage = fewPromPage.isPromotion0Visible();
         assertEquals("Promotion", isPage);
     }
+    @Test
+    public void passwordResetTest(){
+        PasswordReset passwordReset = loginPage.openPasswordResetPage();
+        boolean is = passwordReset.isBackToLoginVisible();
+        assertTrue(is);
+
+
+    }
 
 
     @Test

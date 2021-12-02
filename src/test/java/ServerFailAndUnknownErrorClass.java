@@ -6,11 +6,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-public class ServerFailAndUnknownError extends UseCaseBase {
+
+public class ServerFailAndUnknownErrorClass extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
     public static CodeRequestPopup codeRequestPopup;
     public static PasswordReset passwordReset;
+    public static PasswordResetCodePage passwordResetCodePage;
 
     @BeforeAll
     public static void pageSetup() {
@@ -18,6 +20,8 @@ public class ServerFailAndUnknownError extends UseCaseBase {
         codeRequestPopup = new CodeRequestPopup();
         loginPage = new LoginPage();
         passwordReset = new PasswordReset();
+        passwordResetCodePage = new PasswordResetCodePage();
+
     }
 
     @BeforeEach
@@ -34,6 +38,8 @@ public class ServerFailAndUnknownError extends UseCaseBase {
         boolean is = passwordReset.isServerErrorMessageVisible();
         assertTrue(is);
     }
+
+    //    Unknown Error
     @Test
     public void unknownResetPassError() {
         passwordReset = loginPage.openPasswordResetPage();
@@ -42,19 +48,20 @@ public class ServerFailAndUnknownError extends UseCaseBase {
         assertTrue(is);
     }
 
-
+    //Code pop up request page
 //    Server failed
     @Test
-    public void serverFailedMessage(){
+    public void serverFailedMessage() {
         fewPromPage = loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.serverFail();
         boolean is = codeRequestPopup.isServerFailMessage();
         assertTrue(is);
     }
-//    Unknown Error
+
+    //    Unknown Error
     @Test
-    public void unknownError(){
+    public void unknownError() {
         fewPromPage = loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.unknownError();
@@ -62,6 +69,21 @@ public class ServerFailAndUnknownError extends UseCaseBase {
         assertTrue(is);
     }
 
-
+    //Code Submit Password Reset Page
+//    Server Fail
+    @Test
+    public void passwordResetServerCodeFail() {
+        loginPage.openPasswordResetPage();
+        passwordReset.successOpenCodePasswordResetPage();
+        boolean is = passwordResetCodePage.serverFail();
+        assertTrue(is);
+    }
+    @Test
+    public void passwordResetCodeUnknownError() {
+        loginPage.openPasswordResetPage();
+        passwordReset.successOpenCodePasswordResetPage();
+        boolean is = passwordResetCodePage.unknownError();
+        assertTrue(is);
+    }
 
 }

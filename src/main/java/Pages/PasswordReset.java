@@ -7,21 +7,22 @@ public class PasswordReset extends BasePage {
     private final String PASSWORD_RESET_HEADER = "//span[text() = 'Password reset']";
     private final String EMAIL_FIELD = "//input[@type = 'email']";
     private final String SEND_CODE_BUTTON = "//input[@type = 'submit']";
-    private final String BACK_TO_LOGIN_LINK = "//span[text() = 'Back to Login']";
+    private final String BACK_TO_LOGIN_LINK = "//a[text() = 'Back to Login']";
     private final String MANY_ATTEMPTS_MESSAGE = "//span[text() = 'Try again in a minute.']";
     private final String SERVER_ERROR_MESSAGE = "//span[text() = 'Request ID: req500']";
     private final String UNKNOWN_ERROR_MESSAGE = "//span[text() = 'Request ID: req400']";
 
 
 
-    public Boolean isForgotPassVisible() {
-        return elementExists(PASSWORD_RESET_HEADER);
+    public Boolean isBackToLoginVisible() {
+        return elementExists(BACK_TO_LOGIN_LINK);
     }
 
-    public void success() {
+    public PasswordResetCodePage successOpenCodePasswordResetPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(PASSWORD_RESET_HEADER)));
         sendKeysByXpath(EMAIL_FIELD,"hdehcd@jden.com");
         clickElementByXpath(SEND_CODE_BUTTON);
+        return new PasswordResetCodePage();
     }
     public void openLimiterError() {
         sendKeysByXpath(EMAIL_FIELD, " many@chde.com");
