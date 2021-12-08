@@ -1,6 +1,5 @@
 import Util.UseCaseBase;
 import Pages.*;
-import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,12 +10,10 @@ public class PasswordResetPageTest extends UseCaseBase {
     public static PasswordReset forgotPassword;
 
 
-
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
         forgotPassword = new PasswordReset();
-
     }
 
     @BeforeEach
@@ -24,11 +21,11 @@ public class PasswordResetPageTest extends UseCaseBase {
         LoginPage.navigateLoginPage();
         loginPage.openPasswordResetPage();
     }
+    
     @Test
     public void codePasswordResetPage(){
         PasswordResetCodePage passwordResetCodePage = forgotPassword.successOpenCodePasswordResetPage();
         boolean is = passwordResetCodePage.isCodeSubmitFieldPresent();
         assertTrue(is);
-
     }
 }

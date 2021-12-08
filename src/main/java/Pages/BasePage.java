@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 public class BasePage {
     protected static WebDriver webDriver;
@@ -20,12 +21,11 @@ public class BasePage {
     protected static final Logger logger = LogManager.getLogger(BasePage.class);
 
     public void setDriver(WebDriver webDriver) {
-        this.webDriver = webDriver;
-        wait = new WebDriverWait(webDriver, 5);
-        short_wait = new WebDriverWait(webDriver, 3);
-        long_wait = new WebDriverWait(webDriver, 10);
-        eightSec_wait = new WebDriverWait(webDriver,8);
-
+        BasePage.webDriver = webDriver;
+        wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
+        short_wait = new WebDriverWait(webDriver, Duration.ofSeconds(3));
+        long_wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
+        eightSec_wait = new WebDriverWait(webDriver, Duration.ofSeconds(8));
     }
 
     public void clickElementByXpath(String xpath) {

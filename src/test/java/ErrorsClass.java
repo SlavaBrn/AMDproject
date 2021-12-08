@@ -24,7 +24,7 @@ public class ErrorsClass extends UseCaseBase {
 
     @BeforeEach
     public void Each() {
-        loginPage.navigateLoginPage();
+        LoginPage.navigateLoginPage();
 
 //        fewPromPage = loginPage.openFewPromPage();
     }

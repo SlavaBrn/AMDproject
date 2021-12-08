@@ -27,7 +27,7 @@ public class SuccessPopupTest extends UseCaseBase {
 
     @BeforeEach
     public void Each() {
-        loginPage.navigateLoginPage();
+        LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.openSuccessPopup();

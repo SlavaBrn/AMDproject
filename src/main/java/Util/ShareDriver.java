@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 public class ShareDriver {
     public static WebDriver webDriver;
@@ -15,8 +15,6 @@ public class ShareDriver {
         CHROME,
         FIREFOX,
         IE
-
-
     }
     protected static WebDriver getWebDriver(Browser browser) {
         switch (browser) {
@@ -36,7 +34,7 @@ public class ShareDriver {
 
         }
         webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         return webDriver;
     }
 

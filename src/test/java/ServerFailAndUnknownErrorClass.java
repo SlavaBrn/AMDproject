@@ -1,6 +1,5 @@
 import Pages.*;
 import Util.UseCaseBase;
-import Util.UseCaseBase;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -85,5 +84,4 @@ public class ServerFailAndUnknownErrorClass extends UseCaseBase {
         boolean is = passwordResetCodePage.unknownError();
         assertTrue(is);
     }
-
 }

@@ -79,12 +79,6 @@ public class LoginPage extends BasePage {
 
 
 
-
-
-
-
-
-
     public boolean IsLoginPageVisible() {
         return elementExists(AUTH_FRAME);
 
