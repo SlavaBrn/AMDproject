@@ -3,36 +3,36 @@ package Util;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.ie.InternetExplorerDriver;
-
 import java.time.Duration;
+
+import Pages.Const;
 
 public class ShareDriver {
     public static WebDriver webDriver;
 
     public enum Browser {
         CHROME,
-        FIREFOX,
-        IE
+        FIREFOX
     }
     protected static WebDriver getWebDriver(Browser browser) {
         switch (browser) {
             case CHROME:
                 WebDriverManager.chromedriver().setup();
-                webDriver = new ChromeDriver();
+                ChromeOptions options = new ChromeOptions();
+                if (Const.IS_HEADLESS) {
+                    options.addArguments("--headless");
+                }
+                webDriver = new ChromeDriver(options);
                 break;
 
             case FIREFOX:
                 WebDriverManager.firefoxdriver().setup();
                 webDriver = new FirefoxDriver();
                 break;
-            case IE:
-                WebDriverManager.iedriver().setup();
-                webDriver = new InternetExplorerDriver();
-                break;
-
         }
+
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         return webDriver;

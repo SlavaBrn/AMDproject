@@ -99,7 +99,7 @@ public class CodeRequestPopup extends BasePage {
 
     public boolean resendUnlockButtonPressMessage() {
         clickElementByXpath(UNLOCK_REQUEST);
-        long_wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
+        longWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
         clickElementByXpath(RESEND_UNLOCK_BUTTON);
         return elementExists(UNLOCK_SENT_MESSAGE);
     }

@@ -25,12 +25,9 @@ public class ErrorsClass extends UseCaseBase {
     @BeforeEach
     public void Each() {
         LoginPage.navigateLoginPage();
-
-//        fewPromPage = loginPage.openFewPromPage();
     }
 
     //    Reset Password Page(Forgot Password Link)
-//    Limiter Fail
     @Test
     public void limiterFail() {
         passwordReset = loginPage.openPasswordResetPage();
@@ -38,8 +35,6 @@ public class ErrorsClass extends UseCaseBase {
         boolean is = passwordReset.isManyAttemptsMessageVisible();
         assertTrue(is);
     }
-//Code Submit Password Reset Page
-//    Code Fail
 
     @Test
     public void codeFail() {
@@ -49,8 +44,6 @@ public class ErrorsClass extends UseCaseBase {
         assertTrue(is);
     }
 
-    //    Unlock Popup
-    //    Code Fail
     @Test
     public void noValidMessage() {
         loginPage.openFewPromPage();
@@ -60,7 +53,6 @@ public class ErrorsClass extends UseCaseBase {
         assertTrue(is);
     }
 
-    //    Limiter Error
     @Test
     public void unknownError() {
         loginPage.openFewPromPage();
@@ -69,6 +61,4 @@ public class ErrorsClass extends UseCaseBase {
         boolean is = codeRequestPopup.isLimiterErrorMessage();
         assertTrue(is);
     }
-//    Login Page Errors
-
 }

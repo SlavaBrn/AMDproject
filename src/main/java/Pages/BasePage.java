@@ -7,7 +7,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -15,45 +14,40 @@ import java.time.Duration;
 public class BasePage {
     protected static WebDriver webDriver;
     protected static WebDriverWait wait;
-    protected static WebDriverWait short_wait;
-    protected static WebDriverWait long_wait;
-    protected static WebDriverWait eightSec_wait;
+    protected static WebDriverWait shortWait;
+    protected static WebDriverWait longWait;
     protected static final Logger logger = LogManager.getLogger(BasePage.class);
 
     public void setDriver(WebDriver webDriver) {
+        logger.error(System.getenv("TEST"));
         BasePage.webDriver = webDriver;
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-        short_wait = new WebDriverWait(webDriver, Duration.ofSeconds(3));
-        long_wait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
-        eightSec_wait = new WebDriverWait(webDriver, Duration.ofSeconds(8));
+        shortWait = new WebDriverWait(webDriver, Duration.ofSeconds(3));
+        longWait = new WebDriverWait(webDriver, Duration.ofSeconds(10));
     }
 
     public void clickElementByXpath(String xpath) {
         logger.info("click element with xpath" + xpath);
         findElementByXpath(xpath).click();
-
     }
 
     protected void locateElementByXpath(String xpath) {
         findElementByXpath(xpath);
     }
 
-
     public void sendKeysByXpath(String xpath, String text) {
         findElementByXpath(xpath).sendKeys(text);
     }
-
 
     public boolean elementExists(String xpath) {
         try {
             webDriver.findElement(By.xpath(xpath));
             return true;
         } catch (Exception err) {
-
+            logger.error("Error: " + err);
         }
         return false;
     }
-
 
     protected WebElement findElementByXpath(String xpath) {
         WebElement element;

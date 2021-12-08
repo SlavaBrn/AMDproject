@@ -70,7 +70,7 @@ public class FewPromPage extends BasePage {
 
     public void promotionLock(int num) {
         String path = String.format(PROMOTION_ICON, num);
-        short_wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
+        shortWait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(path)));
         WebElement nameText = webDriver.findElement(By.xpath(path));
         webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText)).click();
     }

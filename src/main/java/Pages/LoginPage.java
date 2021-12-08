@@ -145,7 +145,7 @@ public class LoginPage extends BasePage {
     }
 
 
-//    Russian Caption fields and Headers
+    // Russian Caption fields and Headers
 
     public String languageSelectorHeaderCheckRu() {
         clickElementByXpath(LANGUAGE_SELECTOR);
@@ -189,7 +189,7 @@ public class LoginPage extends BasePage {
         return findElementByXpath(SUBMIT_BUTTON_HEADER_RU).getAttribute("value");
     }
 
-//  Password Login field- text hiding
+    // Password Login field- text hiding
 
     public String textOverPassword(){
         return findElementByXpath(TEXT_VISIBLE).getAttribute("type");
@@ -198,13 +198,11 @@ public class LoginPage extends BasePage {
         return findElementByXpath(PASSWORD_VISIBLE).getAttribute("type");
     }
 
-//   Open Password Reset Page (by clicking on forgot password link)
+    // Open Password Reset Page (by clicking on forgot password link)
     public PasswordReset openPasswordResetPage(){
         clickElementByXpath(FORGOT_PASS_LINK);
         return new PasswordReset();
     }
-
-
 
     public RegisterNewUserPage openRegisterNewUserPage(){
         sendKeysByXpath(EMAIL_FIELD,"admin@a.com");
