@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 public class Config {
     private String Environment = "dev";
     private Boolean IsE2e = false;
+    private String Browser = "chrome";
     private Boolean IsHeadless = false; 
 
     public Config() {
@@ -22,12 +23,17 @@ public class Config {
         if (settings != null) {
             Environment = (String) settings.get("environment");
             IsE2e = (Boolean) settings.get("isE2e");
+            Browser = (String) settings.get("browser");
             IsHeadless = (Boolean) settings.get("isHeadless");
         }
     }
 
     public String GetEnvironment() {
         return Environment;
+    }
+
+    public String GetBrowser() {
+        return Browser;
     }
 
     public Boolean GetIsHeadless() {

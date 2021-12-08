@@ -5,6 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.AbstractDriverOptions;
+
 import java.time.Duration;
 
 import Pages.Const;
@@ -12,24 +15,26 @@ import Pages.Const;
 public class ShareDriver {
     public static WebDriver webDriver;
 
-    public enum Browser {
-        CHROME,
-        FIREFOX
-    }
-    protected static WebDriver getWebDriver(Browser browser) {
-        switch (browser) {
-            case CHROME:
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                if (Const.IS_HEADLESS) {
-                    options.addArguments("--headless");
-                }
-                webDriver = new ChromeDriver(options);
-                break;
+    protected static WebDriver getWebDriver(String browser) {
 
-            case FIREFOX:
+        switch (browser) {
+            case "firefox":
                 WebDriverManager.firefoxdriver().setup();
-                webDriver = new FirefoxDriver();
+                FirefoxOptions ffOptions = new FirefoxOptions();
+                if (Const.IS_HEADLESS) {
+                    ffOptions.addArguments("-headless");
+                }
+                webDriver = new FirefoxDriver(ffOptions);
+            break;
+
+            default:
+            case "chrome":
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                if (Const.IS_HEADLESS) {
+                    chromeOptions.addArguments("--headless");
+                }
+                webDriver = new ChromeDriver(chromeOptions);
                 break;
         }
 

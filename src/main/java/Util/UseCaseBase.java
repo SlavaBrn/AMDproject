@@ -1,9 +1,8 @@
 package Util;
 
+import Pages.Const;
 import Pages.BasePage;
 import org.junit.jupiter.api.*;
-
-
 
 import org.openqa.selenium.WebDriver;
 
@@ -15,7 +14,7 @@ public class UseCaseBase {
     @BeforeAll
     public static void setupMain() {
         page = new BasePage();
-        webDriver = ShareDriver.getWebDriver(ShareDriver.Browser.CHROME);
+        webDriver = ShareDriver.getWebDriver(Const.BROWSER);
         page.setDriver(webDriver);
     }
 
