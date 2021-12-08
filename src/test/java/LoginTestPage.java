@@ -54,8 +54,6 @@ public class LoginTestPage extends UseCaseBase {
         loginPage.clickElementByXpath(loginPage.SUBMIT_BUTTON);
         boolean is = loginPage.IsLPasswordOrLoginIncorrect();
         assertTrue(is);
-
-
     }
 
     @Test
@@ -75,8 +73,6 @@ public class LoginTestPage extends UseCaseBase {
         PasswordReset passwordReset = loginPage.openPasswordResetPage();
         boolean is = passwordReset.isBackToLoginVisible();
         assertTrue(is);
-
-
     }
 
 
@@ -97,7 +93,6 @@ public class LoginTestPage extends UseCaseBase {
         assertEquals("Forgot password?", is4);
         String is5 = loginPage.loginNowButtonCheck();
         assertEquals("Login now", is5);
-
     }
 
     @Test
@@ -128,7 +123,6 @@ public class LoginTestPage extends UseCaseBase {
         loginPage.clickElementByXpath(loginPage.TEXT_PASSWORD_ICON);
         String isPassword = loginPage.passwordOverText();
         assertEquals("password", isPassword);
-
     }
 
     //    Admin Section
@@ -146,7 +140,6 @@ public class LoginTestPage extends UseCaseBase {
         SetUpNewPasswordPage setUpNewPasswordPage = loginPage.openSutUpNewPasswordPage();
         String is = setUpNewPasswordPage.isNewPasswordHeaderVisible();
         assertEquals("Set up new password", is);
-
     }
 //    Success (need to change password and the change will fail)
 

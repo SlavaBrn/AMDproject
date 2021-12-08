@@ -6,5 +6,4 @@ public class RegisterNewUserPage extends BasePage{
     public String isNewUserHeaderVisible(){
         return findElementByXpath(NEW_USER_HEADER).getText();
     }
-
 }

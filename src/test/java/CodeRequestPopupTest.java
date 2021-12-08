@@ -158,6 +158,4 @@ public class CodeRequestPopupTest extends UseCaseBase {
         boolean is = codeRequestPopup.isFailMessage();
         assertTrue(is);
     }
-
-
 }

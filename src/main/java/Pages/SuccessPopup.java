@@ -7,8 +7,8 @@ public class SuccessPopup extends BasePage{
 
     public boolean isSuccessMessageVisible(){
         return elementExists(SUCCESS_MESSAGE);
-
     }
+
     public FewPromPage returnToFewPromPage(){
         clickElementByXpath(CONTINUE_BUTTON);
         return new FewPromPage();

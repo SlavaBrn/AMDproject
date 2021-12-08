@@ -77,7 +77,7 @@ public class FewPromPage extends BasePage {
 
 //    Open DownloadFilePopup
 
-        public DownloadFilePopup openDownloadFilePopup() {
+    public DownloadFilePopup openDownloadFilePopup() {
 //        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(START_DOWNLOAD_BUTTON)));
         WebElement nameText = webDriver.findElement(By.xpath(LOCK));
         WebElement clickIt = webDriver.findElement(with(By.xpath(OPENED_LOCK)).toRightOf(nameText));

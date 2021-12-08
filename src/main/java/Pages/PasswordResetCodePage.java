@@ -16,16 +16,19 @@ public class PasswordResetCodePage extends BasePage {
         clickElementByXpath(CODE_SUBMIT_BUTTON);
         return new NewPasswordCreationPage();
     }
+    
     public boolean codeFail(){
         sendKeysByXpath(CODE_SUBMIT_FIELD, "123456");
         clickElementByXpath(CODE_SUBMIT_BUTTON);
         return elementExists(CODE_FAIL_ERROR);
     }
+
     public boolean serverFail(){
         sendKeysByXpath(CODE_SUBMIT_FIELD, "500000");
         clickElementByXpath(CODE_SUBMIT_BUTTON);
         return elementExists(SERVER_FAIL_ERROR);
     }
+
     public boolean unknownError(){
         sendKeysByXpath(CODE_SUBMIT_FIELD, "400000");
         clickElementByXpath(CODE_SUBMIT_BUTTON);

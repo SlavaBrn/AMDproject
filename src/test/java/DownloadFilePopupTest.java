@@ -25,8 +25,6 @@ public class DownloadFilePopupTest extends UseCaseBase {
         codeRequestPopup = new CodeRequestPopup();
         successPopup = new SuccessPopup();
         downloadFilePopup = new DownloadFilePopup();
-
-
     }
 
     @BeforeEach
@@ -56,9 +54,6 @@ public class DownloadFilePopupTest extends UseCaseBase {
         downloadFilePopup.checkBoxIsSelected();
         downloadFilePopup.clickElementByXpath(COPY_LINK_BUTTON);
         String isString = downloadFilePopup.clipboard();
-        assertEquals("https://amdtp-mock-qa.phoenixfms.ca/test.zip",isString);
-
+        assertEquals(Const.BASE_URL + "/test.zip", isString);
     }
-
-
 }

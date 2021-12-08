@@ -21,9 +21,6 @@ public class FewPromTestPage extends UseCaseBase {
         loginPage = new LoginPage();
         codeRequestPopup = new CodeRequestPopup();
         successPopup = new SuccessPopup();
-
-
-
     }
 
     @BeforeEach
@@ -99,7 +96,6 @@ public class FewPromTestPage extends UseCaseBase {
         assertEquals("Деактивированная", is3);
 
     }
-
 
     @Test
     public void downloadFilePopupCheck() {

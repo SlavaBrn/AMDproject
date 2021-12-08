@@ -21,8 +21,6 @@ public class SuccessPopupTest extends UseCaseBase {
         codeRequestPopup = new CodeRequestPopup();
         loginPage = new LoginPage();
         successPopup = new SuccessPopup();
-
-
     }
 
     @BeforeEach
@@ -32,6 +30,7 @@ public class SuccessPopupTest extends UseCaseBase {
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.openSuccessPopup();
     }
+    
     @Test
     public void continueToFewpromPage(){
         fewPromPage = successPopup.returnToFewPromPage();

@@ -20,7 +20,6 @@ public class ServerFailAndUnknownErrorClass extends UseCaseBase {
         loginPage = new LoginPage();
         passwordReset = new PasswordReset();
         passwordResetCodePage = new PasswordResetCodePage();
-
     }
 
     @BeforeEach
@@ -77,6 +76,7 @@ public class ServerFailAndUnknownErrorClass extends UseCaseBase {
         boolean is = passwordResetCodePage.serverFail();
         assertTrue(is);
     }
+
     @Test
     public void passwordResetCodeUnknownError() {
         loginPage.openPasswordResetPage();

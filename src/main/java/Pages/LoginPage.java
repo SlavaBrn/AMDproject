@@ -1,10 +1,6 @@
 package Pages;
 
-
-
-
 public class LoginPage extends BasePage {
-
 
     //1. Success (with a few promotions):
     public final String FEW_PROM_LOGIN = "anygfhdhsh@a.com";
@@ -215,8 +211,8 @@ public class LoginPage extends BasePage {
         sendKeysByXpath(PASSWORD_FIELD,"testpass");
         clickElementByXpath(SUBMIT_BUTTON);
         return new RegisterNewUserPage();
-
     }
+
     public SetUpNewPasswordPage openSutUpNewPasswordPage(){
         sendKeysByXpath(EMAIL_FIELD,"change@a.com");
         sendKeysByXpath(PASSWORD_FIELD,"testpass");
@@ -229,7 +225,6 @@ public class LoginPage extends BasePage {
         sendKeysByXpath(PASSWORD_FIELD,"testpass");
         clickElementByXpath(SUBMIT_BUTTON);
         return new SetUpNewPasswordFailPage();
-
     }
 
 

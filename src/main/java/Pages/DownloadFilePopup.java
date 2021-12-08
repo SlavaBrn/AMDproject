@@ -17,8 +17,7 @@ public class DownloadFilePopup extends BasePage{
     private final String CHECK_BOX  = "//*[@type = 'checkbox']";
     private final String ADDHERE  = "";
 
-
-
+    
     public String isDownloadHeaderVisible(){
         return findElementByXpath(DOWNLOAD_FILE_HEADER).getText();
 
