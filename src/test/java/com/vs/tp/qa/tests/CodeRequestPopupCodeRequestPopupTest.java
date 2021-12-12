@@ -5,22 +5,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.vs.tp.qa.pages.CodeRequestPopup;
+import com.vs.tp.qa.pages.CodeRequestPopupPage;
 import com.vs.tp.qa.pages.FewPromPage;
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.SuccessPopup;
+import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
 
-public class CodeRequestPopupTest extends UseCaseBase {
+public class CodeRequestPopupCodeRequestPopupTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
-    public static CodeRequestPopup codeRequestPopup;
+    public static CodeRequestPopupPage codeRequestPopup;
 
     @BeforeAll
     public static void pageSetup() {
         fewPromPage = new FewPromPage();
-        codeRequestPopup = new CodeRequestPopup();
+        codeRequestPopup = new CodeRequestPopupPage();
         loginPage = new LoginPage();
     }
 
@@ -148,8 +148,8 @@ public class CodeRequestPopupTest extends UseCaseBase {
     @Test
     public void newSuccessPopupTest(){
         fewPromPage.openCodeRequestPage();
-        SuccessPopup successPopup = codeRequestPopup.openSuccessPopup();
-        boolean is = successPopup.isSuccessMessageVisible();
+        SuccessPopupPage successPopupPage = codeRequestPopup.openSuccessPopup();
+        boolean is = successPopupPage.isSuccessMessageVisible();
         assertTrue(is);
     }
 //    Code Fail

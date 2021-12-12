@@ -5,25 +5,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.vs.tp.qa.pages.CodeRequestPopup;
+import com.vs.tp.qa.pages.CodeRequestPopupPage;
 import com.vs.tp.qa.pages.FewPromPage;
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.SuccessPopup;
+import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
-public class SuccessPopupTest extends UseCaseBase {
+public class SuccessPopupSuccessPopupTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
-    public static CodeRequestPopup codeRequestPopup;
-    public static SuccessPopup successPopup;
+    public static CodeRequestPopupPage codeRequestPopup;
+    public static SuccessPopupPage successPopupPage;
 
 
     @BeforeAll
     public static void pageSetup() {
         fewPromPage = new FewPromPage();
-        codeRequestPopup = new CodeRequestPopup();
+        codeRequestPopup = new CodeRequestPopupPage();
         loginPage = new LoginPage();
-        successPopup = new SuccessPopup();
+        successPopupPage = new SuccessPopupPage();
     }
 
     @BeforeEach
@@ -36,7 +36,7 @@ public class SuccessPopupTest extends UseCaseBase {
     
     @Test
     public void continueToFewpromPage(){
-        fewPromPage = successPopup.returnToFewPromPage();
+        fewPromPage = successPopupPage.returnToFewPromPage();
         boolean is = fewPromPage.isLogOutButtonVisible();
         assertTrue(is);
     }

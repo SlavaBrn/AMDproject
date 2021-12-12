@@ -201,9 +201,9 @@ public class LoginPage extends BasePage {
     }
 
     // Open Password Reset Page (by clicking on forgot password link)
-    public PasswordReset openPasswordResetPage(){
+    public PasswordResetPage openPasswordResetPage(){
         clickElementByXpath(FORGOT_PASS_LINK);
-        return new PasswordReset();
+        return new PasswordResetPage();
     }
 
     public RegisterNewUserPage openRegisterNewUserPage(){

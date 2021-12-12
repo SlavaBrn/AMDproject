@@ -3,7 +3,7 @@ package com.vs.tp.qa.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class CodeRequestPopup extends BasePage {
+public class CodeRequestPopupPage extends BasePage {
     private final String unlock = "//*[text() = 'Unlock Code Request']";
 
     private final String GREETING_TEXT = "//*[text() = 'In order to download this file you need to unlock it first.']";
@@ -114,12 +114,12 @@ public class CodeRequestPopup extends BasePage {
 
 
     //    Unlock Popup (code submit)
-    public SuccessPopup openSuccessPopup() {
+    public SuccessPopupPage openSuccessPopup() {
         clickElementByXpath(UNLOCK_REQUEST);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_SENT_MESSAGE)));
         sendKeysByXpath(UNLOCK_FIELD, SUCCESS_CODE_INPUT);
         clickElementByXpath(SUBMIT_CODE_BUTTON);
-        return new SuccessPopup();
+        return new SuccessPopupPage();
     }
 
     public void codeFail() {

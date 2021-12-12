@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.vs.tp.qa.pages.FewPromPage;
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.PasswordReset;
+import com.vs.tp.qa.pages.PasswordResetPage;
 import com.vs.tp.qa.pages.RegisterNewUserPage;
 import com.vs.tp.qa.pages.SetUpNewPasswordPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
-public class LoginTestPage extends UseCaseBase {
+public class LoginLoginTest extends UseCaseBase {
     private static final String INCOMPLETE_EMAIL1 = "ddeuud@";
     private static final String INCOMPLETE_MAIL2 = "@a.com";
     private static final String INCOMPLETE_MAIL3 = "@";
@@ -23,13 +23,13 @@ public class LoginTestPage extends UseCaseBase {
 
 
     public static LoginPage loginPage;
-    public static PasswordReset forgotPassword;
+    public static PasswordResetPage forgotPassword;
 
 
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
-        forgotPassword = new PasswordReset();
+        forgotPassword = new PasswordResetPage();
 
     }
 
@@ -74,7 +74,7 @@ public class LoginTestPage extends UseCaseBase {
     }
     @Test
     public void passwordResetTest(){
-        PasswordReset passwordReset = loginPage.openPasswordResetPage();
+        PasswordResetPage passwordReset = loginPage.openPasswordResetPage();
         boolean is = passwordReset.isBackToLoginVisible();
         assertTrue(is);
     }

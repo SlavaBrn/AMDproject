@@ -7,21 +7,21 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.vs.tp.qa.pages.LoginPage;
 import com.vs.tp.qa.pages.NewPasswordCreationPage;
-import com.vs.tp.qa.pages.PasswordReset;
+import com.vs.tp.qa.pages.PasswordResetPage;
 import com.vs.tp.qa.pages.PasswordResetCodePage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
 
-public class PasswordResetCodePageTest extends UseCaseBase {
+public class PasswordResetCodePasswordResetCodeTest extends UseCaseBase {
     public static LoginPage loginPage;
-    public static PasswordReset forgotPassword;
+    public static PasswordResetPage forgotPassword;
     public static PasswordResetCodePage passwordResetCodePage;
 
     
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
-        forgotPassword = new PasswordReset();
+        forgotPassword = new PasswordResetPage();
         passwordResetCodePage = new PasswordResetCodePage();
     }
 

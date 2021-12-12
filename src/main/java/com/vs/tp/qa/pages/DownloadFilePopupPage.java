@@ -9,7 +9,7 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 
-public class DownloadFilePopup extends BasePage{
+public class DownloadFilePopupPage extends BasePage{
     private final String DOWNLOAD_FILE_HEADER  = "//*[text() = 'Download File']";
     private final String COPY_LINK_BUTTON  = "//*[text() = 'Copy Link']";
     private final String START_DOWNLOAD_BUTTON  = "//*[text() = 'Start Download']";

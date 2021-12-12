@@ -7,25 +7,25 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.vs.tp.qa.pages.CodeRequestPopup;
-import com.vs.tp.qa.pages.DownloadFilePopup;
+import com.vs.tp.qa.pages.CodeRequestPopupPage;
+import com.vs.tp.qa.pages.DownloadFilePopupPage;
 import com.vs.tp.qa.pages.FewPromPage;
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.SuccessPopup;
+import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
-public class FewPromTestPage extends UseCaseBase {
+public class FewPromFewPromTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
-    public static CodeRequestPopup codeRequestPopup;
-    public static SuccessPopup successPopup;
+    public static CodeRequestPopupPage codeRequestPopup;
+    public static SuccessPopupPage successPopupPage;
 
 
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
-        codeRequestPopup = new CodeRequestPopup();
-        successPopup = new SuccessPopup();
+        codeRequestPopup = new CodeRequestPopupPage();
+        successPopupPage = new SuccessPopupPage();
     }
 
     @BeforeEach
@@ -106,8 +106,8 @@ public class FewPromTestPage extends UseCaseBase {
     public void downloadFilePopupCheck() {
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.openSuccessPopup();
-        fewPromPage = successPopup.returnToFewPromPage();
-        DownloadFilePopup downloadFilePopup = fewPromPage.openDownloadFilePopup();
+        fewPromPage = successPopupPage.returnToFewPromPage();
+        DownloadFilePopupPage downloadFilePopup = fewPromPage.openDownloadFilePopup();
         String is = downloadFilePopup.isDownloadHeaderVisible();
         assertEquals("Download File", is);
     }

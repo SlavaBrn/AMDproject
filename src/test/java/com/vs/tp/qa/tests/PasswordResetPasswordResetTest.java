@@ -6,19 +6,19 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.PasswordReset;
+import com.vs.tp.qa.pages.PasswordResetPage;
 import com.vs.tp.qa.pages.PasswordResetCodePage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
-public class PasswordResetPageTest extends UseCaseBase {
+public class PasswordResetPasswordResetTest extends UseCaseBase {
     public static LoginPage loginPage;
-    public static PasswordReset forgotPassword;
+    public static PasswordResetPage forgotPassword;
 
 
     @BeforeAll
     public static void pageSetup() {
         loginPage = new LoginPage();
-        forgotPassword = new PasswordReset();
+        forgotPassword = new PasswordResetPage();
     }
 
     @BeforeEach

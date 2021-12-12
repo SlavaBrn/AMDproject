@@ -51,20 +51,20 @@ public class FewPromPage extends BasePage {
     }
 
 
-    public CodeRequestPopup openCodeRequestPage() {
+    public CodeRequestPopupPage openCodeRequestPage() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_REQUEST_HEADER)));
         WebElement nameText = webDriver.findElement(By.xpath(ACTIVE));
         WebElement clickIt = webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText));
         clickIt.click();
-        return new CodeRequestPopup();
+        return new CodeRequestPopupPage();
     }
 
-    public CodeRequestPopup openCodeRequestPageForRussian() {
+    public CodeRequestPopupPage openCodeRequestPageForRussian() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(UNLOCK_REQUEST_HEADER_RU)));
         WebElement nameText = webDriver.findElement(By.xpath(ACTIVE_RU));
         WebElement clickIt = webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText));
         clickIt.click();
-        return new CodeRequestPopup();
+        return new CodeRequestPopupPage();
     }
 
 
@@ -75,14 +75,14 @@ public class FewPromPage extends BasePage {
         webDriver.findElement(with(By.xpath(LOCK)).toRightOf(nameText)).click();
     }
 
-//    Open DownloadFilePopup
+//    Open DownloadFilePopupPage
 
-    public DownloadFilePopup openDownloadFilePopup() {
+    public DownloadFilePopupPage openDownloadFilePopup() {
 //        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(START_DOWNLOAD_BUTTON)));
         WebElement nameText = webDriver.findElement(By.xpath(LOCK));
         WebElement clickIt = webDriver.findElement(with(By.xpath(OPENED_LOCK)).toRightOf(nameText));
         clickIt.click();
-        return new DownloadFilePopup();
+        return new DownloadFilePopupPage();
     }
 
 

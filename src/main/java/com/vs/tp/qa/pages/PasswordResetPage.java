@@ -3,7 +3,7 @@ package com.vs.tp.qa.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class PasswordReset extends BasePage {
+public class PasswordResetPage extends BasePage {
     private final String PASSWORD_RESET_HEADER = "//span[text() = 'Password reset']";
     private final String EMAIL_FIELD = "//input[@type = 'email']";
     private final String SEND_CODE_BUTTON = "//input[@type = 'submit']";

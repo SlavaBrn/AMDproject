@@ -7,21 +7,21 @@ import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
 import com.vs.tp.qa.general.Const;
-import com.vs.tp.qa.pages.CodeRequestPopup;
-import com.vs.tp.qa.pages.DownloadFilePopup;
+import com.vs.tp.qa.pages.CodeRequestPopupPage;
+import com.vs.tp.qa.pages.DownloadFilePopupPage;
 import com.vs.tp.qa.pages.FewPromPage;
 import com.vs.tp.qa.pages.LoginPage;
-import com.vs.tp.qa.pages.SuccessPopup;
+import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DownloadFilePopupTest extends UseCaseBase {
+public class DownloadFilePopupDownloadFilePopupTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
-    public static CodeRequestPopup codeRequestPopup;
-    public static SuccessPopup successPopup;
-    public static DownloadFilePopup downloadFilePopup;
+    public static CodeRequestPopupPage codeRequestPopup;
+    public static SuccessPopupPage successPopupPage;
+    public static DownloadFilePopupPage downloadFilePopup;
     public static String COPY_LINK_BUTTON  = "//*[text() = 'Copy Link']";
 
     @BeforeAll
@@ -29,9 +29,9 @@ public class DownloadFilePopupTest extends UseCaseBase {
 
         loginPage = new LoginPage();
         fewPromPage = new FewPromPage();
-        codeRequestPopup = new CodeRequestPopup();
-        successPopup = new SuccessPopup();
-        downloadFilePopup = new DownloadFilePopup();
+        codeRequestPopup = new CodeRequestPopupPage();
+        successPopupPage = new SuccessPopupPage();
+        downloadFilePopup = new DownloadFilePopupPage();
     }
 
     @BeforeEach
@@ -40,7 +40,7 @@ public class DownloadFilePopupTest extends UseCaseBase {
         fewPromPage = loginPage.openFewPromPage();
         fewPromPage.openCodeRequestPage();
         codeRequestPopup.openSuccessPopup();
-        successPopup.returnToFewPromPage();
+        successPopupPage.returnToFewPromPage();
         fewPromPage.openDownloadFilePopup();
     }
 
