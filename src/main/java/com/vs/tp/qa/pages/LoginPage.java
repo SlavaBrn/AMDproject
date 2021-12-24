@@ -1,48 +1,21 @@
 package com.vs.tp.qa.pages;
 
 import com.vs.tp.qa.general.Const;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
+
 
     //1. Success (with a few promotions):
     public final String FEW_PROM_LOGIN = "anygfhdhsh@a.com";
     public final String FEW_PROM_PASSWORD = "testpass";
-
-    //1a. Success (with many promotions):
-    public final String MANY_PROM_LOGIN = "long@a.com";
-    public final String MANY_PROM_PASSWORD = "testpass";
-
-    //1b. Success admin:
-    public final String SUCCESS_ADMIN_LOGIN = "admin@a.com";
-    public final String SUCCESS_ADMIN_PASSWORD = "testpass";
-
-    //1c. Success (need to change password):
-    public final String SUCCESS_CHANGE_PASS_LOGIN = "change@a.com";
-    public final String SUCCESS_CHANG_PASS_PASSWORD = "testpass";
-
-    //1d. Success (need to change password and the change will fail):
-    public final String SUCCESS_CHANGE_PASS_FAIL_LOGIN = "changefail@a.com";
-    public final String SUCCESS_CHANGE_PASS_FAIL_PASSWORD = "testpass";
-
-    //1e. Success (5 seconds auth JWT life):
-    public final String SUCCESS_JWT_LOGIN = "seccion@a.com";
-    public final String SUCCESS_JWT_PASSWORD = "testpass";
-
-    //2. Fail (wrong credentials):
-    public final String FAIL_LOGIN = "any";
-    public final String FAIL_PASSWORD = "any, except 'testpass'";
+    public final String FEW_PROM_URL = "https://amdtp-mock-qa.phoenixfms.ca/promotions";
 
     //3. Server fail:
-    public final String login = "server@<any valid domain name>";
-    public final String password = "any";
+    private final String SERVER_ERROR_MESSAGE = "//span[text() = 'Request ID: req500']";
 
-    //4. Limiter fail:
-    public final String LIMITER_FAIL_LOGIN = "many@<any valid domain name>";
-    public final String LIMITER_FAIL_PASSWORD = "any";
-
-    //5. Unknown error:
-    public final String UNKNOWN_ERROR_LOGIN = "else@<any valid domain name>";
-    public final String UNKNOWN_ERROR_PASSWORD = "any";
 
     public final String AUTH_FRAME = "//*[@id = 'auth-greeting']";
     public final String EMAIL_FIELD = "//input[@type = 'email']";
@@ -61,7 +34,8 @@ public class LoginPage extends BasePage {
     public final String SUBMIT_BUTTON_HEADER = "//input[@value = 'Login now']";
 
 //    private final String RECORDS_ERROR = "//*[(text() = 'The email and password you entered do not match our records')]";
-    private final String RECORDS_ERROR = "//span[@class =  'error-text error-show']";
+    public final String RECORDS_ERROR = "//span[text() =  'The email and password you entered']";
+    private final String UNKNOWN_ERROR = "//span[text() = 'Request ID: req400']";
 
 
 
@@ -75,17 +49,41 @@ public class LoginPage extends BasePage {
     public final String TEXT_VISIBLE = "//input[@type = 'text']";
     public final String PASSWORD_VISIBLE = "//input[@type = 'password']";
 
+    private final String MANY_ATTEMPTS_MESSAGE = "//span[text() = 'Try again in a minute.']";
+
 
 
     public boolean IsLoginPageVisible() {
         return elementExists(AUTH_FRAME);
-
     }
+    public boolean IsServerFailVisible() {
+        sendKeysByXpath(EMAIL_FIELD,"server@<any");
+        sendKeysByXpath(PASSWORD_FIELD,"hbdhejdbe");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return elementExists(SERVER_ERROR_MESSAGE);
+    }
+    public Boolean isManyAttemptsMessageVisible() {
+        sendKeysByXpath(EMAIL_FIELD,"many@jnei");
+        sendKeysByXpath(PASSWORD_FIELD,"kcmr");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return elementExists(MANY_ATTEMPTS_MESSAGE);
+    }
+    public Boolean isUnknownErrorMessageVisible() {
+        sendKeysByXpath(EMAIL_FIELD,"else@<any");
+        sendKeysByXpath(PASSWORD_FIELD,"kcmr");
+        clickElementByXpath(SUBMIT_BUTTON);
+        return elementExists(UNKNOWN_ERROR);
+    }
+
     public boolean IsLForgotPasswordLink() {
         return elementExists(FORGOT_PASS_LINK);
 
     }
     public boolean IsLPasswordOrLoginIncorrect() {
+        sendKeysByXpath(EMAIL_FIELD, "hgdeyd@a");
+        sendKeysByXpath(PASSWORD_FIELD, "bsuxusxunxsnu");
+        clickElementByXpath(SUBMIT_BUTTON);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(RECORDS_ERROR)));
         return elementExists(RECORDS_ERROR);
     }
 
@@ -95,11 +93,17 @@ public class LoginPage extends BasePage {
     }
 
     public FewPromPage openFewPromPage() {
+        webDriver.get("https://amdtp-mock-qa.phoenixfms.ca/login");
         sendKeysByXpath(EMAIL_FIELD, FEW_PROM_LOGIN);
         sendKeysByXpath(PASSWORD_FIELD,FEW_PROM_PASSWORD);
         clickElementByXpath(SUBMIT_BUTTON);
         return new FewPromPage();
     }
+    public static void openFewPromUrl(){
+        webDriver.get("https://amdtp-mock-qa.phoenixfms.ca/login");
+    }
+
+
 
 
     //        English Caption fields and Headers

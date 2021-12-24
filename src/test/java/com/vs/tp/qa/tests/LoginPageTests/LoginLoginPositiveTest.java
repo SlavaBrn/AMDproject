@@ -1,4 +1,4 @@
-package com.vs.tp.qa.tests;
+package com.vs.tp.qa.tests.LoginPageTests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,8 +13,11 @@ import com.vs.tp.qa.pages.PasswordResetPage;
 import com.vs.tp.qa.pages.RegisterNewUserPage;
 import com.vs.tp.qa.pages.SetUpNewPasswordPage;
 import com.vs.tp.qa.utils.UseCaseBase;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginLoginTest extends UseCaseBase {
+public class LoginLoginPositiveTest extends UseCaseBase {
     private static final String INCOMPLETE_EMAIL1 = "ddeuud@";
     private static final String INCOMPLETE_MAIL2 = "@a.com";
     private static final String INCOMPLETE_MAIL3 = "@";
@@ -24,7 +27,6 @@ public class LoginLoginTest extends UseCaseBase {
 
     public static LoginPage loginPage;
     public static PasswordResetPage forgotPassword;
-
 
     @BeforeAll
     public static void pageSetup() {
@@ -38,45 +40,40 @@ public class LoginLoginTest extends UseCaseBase {
         LoginPage.navigateLoginPage();
     }
 
-//    Negative test: incomplete chars in E-mail field with the correct password
-
-    @ParameterizedTest
-    @ValueSource(strings = {INCOMPLETE_EMAIL1, INCOMPLETE_MAIL2, INCOMPLETE_MAIL3, EMAIL_EMPTY, MAIL_ONLY_LETTERS})
-    public void emailFieldNegative(String input) {
-        loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD, "testpass");
-        loginPage.sendKeysByXpath(loginPage.EMAIL_FIELD, input);
-        loginPage.clickElementByXpath(loginPage.SUBMIT_BUTTON);
-        boolean is = loginPage.IsLForgotPasswordLink();
-        assertTrue(is);
-    }
-
-    //    Incorrect Credentials message "The email and password you entered do not match our records"
-    @Test
-    public void incorrectCredentials() {
-        loginPage.sendKeysByXpath(loginPage.EMAIL_FIELD, "hgdeyd@a");
-        loginPage.sendKeysByXpath(loginPage.PASSWORD_FIELD, "bsuxusxunxsnu");
-        loginPage.clickElementByXpath(loginPage.SUBMIT_BUTTON);
-        boolean is = loginPage.IsLPasswordOrLoginIncorrect();
-        assertTrue(is);
-    }
+//    Login Page
 
     @Test
     public void loginPageLoadTest() {
         boolean isVisible = loginPage.IsLoginPageVisible();
         assertTrue(isVisible);
     }
-
+//Few Ppromotion Page
     @Test
     public void fewPromPageTest() {
         FewPromPage fewPromPage = loginPage.openFewPromPage();
         String isPage = fewPromPage.isPromotion0Visible();
         assertEquals("Promotion", isPage);
     }
+// Success admin(Password Reset)
     @Test
     public void passwordResetTest(){
         PasswordResetPage passwordReset = loginPage.openPasswordResetPage();
         boolean is = passwordReset.isBackToLoginVisible();
         assertTrue(is);
+    }
+    // 1c   Success (need to change password)-Set up new password page
+    @Test
+    public void openNewPasswordPage() {
+        SetUpNewPasswordPage setUpNewPasswordPage = loginPage.openSutUpNewPasswordPage();
+        String is = setUpNewPasswordPage.isNewPasswordHeaderVisible();
+        assertEquals("Set up new password", is);
+    }
+    // 1d Success (need to change password and the change will fail) NEw User Register Page
+    @Test
+    public void openRegisterNewUserPage() {
+        RegisterNewUserPage registerNewUserPage = loginPage.openRegisterNewUserPage();
+        String is = registerNewUserPage.isNewUserHeaderVisible();
+        assertEquals("Register a new user", is);
     }
 
 
@@ -129,22 +126,8 @@ public class LoginLoginTest extends UseCaseBase {
         assertEquals("password", isPassword);
     }
 
-    //    Admin Section
-//    Opening new page success
-    @Test
-    public void openRegisterNewUserPage() {
-        RegisterNewUserPage registerNewUserPage = loginPage.openRegisterNewUserPage();
-        String is = registerNewUserPage.isNewUserHeaderVisible();
-        assertEquals("Register a new user", is);
-    }
 
-    //    Success (need to change password)
-    @Test
-    public void openNewPasswordPage() {
-        SetUpNewPasswordPage setUpNewPasswordPage = loginPage.openSutUpNewPasswordPage();
-        String is = setUpNewPasswordPage.isNewPasswordHeaderVisible();
-        assertEquals("Set up new password", is);
-    }
-//    Success (need to change password and the change will fail)
+
+
 
 }

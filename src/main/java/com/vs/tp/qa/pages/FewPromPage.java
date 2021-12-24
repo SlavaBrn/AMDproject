@@ -13,7 +13,7 @@ public class FewPromPage extends BasePage {
     public final String PROMOTION_COLUMN = "//span[text() = 'Promotion']";
     public final String EXPIRATION = "//span[text() = 'Expiration']";
     public final String STATUS = "//span[text() = 'Status']";
-    public final String LOGOUT_LINK = "//span[text() = 'Logout']";
+    public final String LOGOUT_LINK = "//button[text() = 'Logout']";
     public final String PROMOTION_COLUMN_RU = "//span[text() = 'Название акции']";
     public final String EXPIRATION_RU = "//span[text() = 'Дата окончания']";
     public final String STATUS_RU = "//span[text() = 'Статус']";
@@ -48,6 +48,10 @@ public class FewPromPage extends BasePage {
     public boolean isLogOutButtonVisible() {
         boolean is = elementExists(LOGOUT_BUTTON);
         return is;
+    }
+    public LoginPage logoutFromFewProm(){
+        clickElementByXpath(LOGOUT_LINK);
+        return new LoginPage();
     }
 
 

@@ -1,4 +1,4 @@
-package com.vs.tp.qa.tests;
+package com.vs.tp.qa.tests.FewPromotionTests;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,7 @@ import com.vs.tp.qa.pages.LoginPage;
 import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
-public class FewPromFewPromTest extends UseCaseBase {
+public class FewPromFewPromPositiveTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
     public static CodeRequestPopupPage codeRequestPopup;
@@ -30,19 +30,10 @@ public class FewPromFewPromTest extends UseCaseBase {
 
     @BeforeEach
     public void beforeEach() {
-        LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
     }
 
 
-    @ParameterizedTest
-    @ValueSource(ints = {1, 2, 3})
-    public void NoLoadPage(int id) {
-        //codeRequestPopup = fewPromPage.openCodeRequestPage();
-        fewPromPage.promotionLock(id);
-        boolean visible = fewPromPage.isLogOutButtonVisible();
-        assertTrue(visible);
-    }
 
     @ParameterizedTest
     @ValueSource(ints = {0, 4})
@@ -51,7 +42,6 @@ public class FewPromFewPromTest extends UseCaseBase {
         fewPromPage.promotionLock(id);
         boolean visible = codeRequestPopup.isVisible();
         assertTrue(visible);
-
 
     }
 
@@ -111,5 +101,12 @@ public class FewPromFewPromTest extends UseCaseBase {
         String is = downloadFilePopup.isDownloadHeaderVisible();
         assertEquals("Download File", is);
     }
+    @Test
+    public void logOutToLoginPage(){
+        fewPromPage.logoutFromFewProm();
+        boolean is = loginPage.IsLoginPageVisible();
+        assertTrue(is);
+    }
+
 
 }

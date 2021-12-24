@@ -1,4 +1,4 @@
-package com.vs.tp.qa.tests;
+package com.vs.tp.qa.tests.UnlockPopupCodeSubmit;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import com.vs.tp.qa.pages.SuccessPopupPage;
 import com.vs.tp.qa.utils.UseCaseBase;
 
 
-public class CodeRequestPopupCodeRequestPopupTest extends UseCaseBase {
+public class CodeRequestPopupCodeRequestPopupPositiveTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
     public static CodeRequestPopupPage codeRequestPopup;
@@ -26,7 +26,7 @@ public class CodeRequestPopupCodeRequestPopupTest extends UseCaseBase {
 
     @BeforeEach
     public void Each() {
-        LoginPage.navigateLoginPage();
+//        LoginPage.navigateLoginPage();
         fewPromPage = loginPage.openFewPromPage();
     }
     //    Unlock Code Request popup elements language check
@@ -152,12 +152,6 @@ public class CodeRequestPopupCodeRequestPopupTest extends UseCaseBase {
         boolean is = successPopupPage.isSuccessMessageVisible();
         assertTrue(is);
     }
-//    Code Fail
-    @Test
-    public void noValidMessage(){
-        fewPromPage.openCodeRequestPage();
-        codeRequestPopup.codeFail();
-        boolean is = codeRequestPopup.isFailMessage();
-        assertTrue(is);
-    }
+
+
 }

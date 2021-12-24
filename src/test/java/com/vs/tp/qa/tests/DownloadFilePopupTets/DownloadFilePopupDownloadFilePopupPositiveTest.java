@@ -1,4 +1,4 @@
-package com.vs.tp.qa.tests;
+package com.vs.tp.qa.tests.DownloadFilePopupTets;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,7 @@ import com.vs.tp.qa.utils.UseCaseBase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DownloadFilePopupDownloadFilePopupTest extends UseCaseBase {
+public class DownloadFilePopupDownloadFilePopupPositiveTest extends UseCaseBase {
     public static FewPromPage fewPromPage;
     public static LoginPage loginPage;
     public static CodeRequestPopupPage codeRequestPopup;

@@ -1,4 +1,4 @@
-package com.vs.tp.qa.tests;
+package com.vs.tp.qa.tests.SuccessPopupTest;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class SuccessPopupSuccessPopupTest extends UseCaseBase {
     }
     
     @Test
-    public void continueToFewpromPage(){
+    public void continueToFewPromPage(){
         fewPromPage = successPopupPage.returnToFewPromPage();
         boolean is = fewPromPage.isLogOutButtonVisible();
         assertTrue(is);

@@ -1,16 +1,15 @@
 package com.vs.tp.qa.general;
 
-import static org.junit.jupiter.api.extension.ConditionEvaluationResult.disabled;
-import static org.junit.jupiter.api.extension.ConditionEvaluationResult.enabled;
-import static org.junit.platform.commons.util.AnnotationUtils.findAnnotation;
-
-import java.util.Optional;
-
+import com.vs.tp.qa.annotations.DisabledForE2E;
 import org.junit.jupiter.api.extension.ConditionEvaluationResult;
 import org.junit.jupiter.api.extension.ExecutionCondition;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import com.vs.tp.qa.annotations.DisabledForE2E;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.extension.ConditionEvaluationResult.disabled;
+import static org.junit.jupiter.api.extension.ConditionEvaluationResult.enabled;
+import static org.junit.platform.commons.util.AnnotationUtils.findAnnotation;
 
 public class DeisabledForE2ECondition implements ExecutionCondition {
 
